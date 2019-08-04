@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<io.h>
+#include<fcntl.h>
+
+
+
+void srchdel()
+{
+	char desc[1000];
+	char ch;
+	int QID,n,m,i=1;
+	FILE *file1,*file2;
+	file1 = fopen("question.txt","r");
+	Start:printf("Input Question ID: ");
+	scanf(" %d ",&n);
+	while (!feof(file1))
+	{
+		
+		{
+			fscanf(file1,"%d",&QID);
+			fgets(desc,1000,file1);
+			if(n==QID)
+			{
+				printf("%d %s\n",QID,desc);
+			}	
+		}
+		
+	}
+	printf("Del Qust Yes(1)/No(2)\n"); scanf("%d",&m);
+	switch (m)
+	{
+		case 1:
+			{
+				file2=fopen("new.txt","w");
+				ch=getc(file1);
+				while(ch != EOF)
+				{
+					i++;
+					ch=getc(file1);
+					if(i!=n)
+						putc(ch,file2);
+				}
+				fclose(file1);
+    			fclose(file2);
+    			remove("question.txt");
+    		    rename("text.txt", "question.txt");
+				
+				
+			}
+		default:
+			{
+				goto Start;
+				break;
+			}
+			
+			
+	}
+	
+	
+};
+int main()
+{
+}
